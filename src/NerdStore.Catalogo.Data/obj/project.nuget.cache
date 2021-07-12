@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "UP0wD6/2vmfa006vClwHGn4ySbbKmU1WJkp9dYmzzHqvDS0CBNQdJA0WIEm5g7UQOhrwr3Go6thBgrEBDb9ICw==",
+  "dgSpecHash": "mbcumFU+R6zN9pqHmbLakSpLIMteqSgI/R1pgJjLuxZ65Als38/nDDkoa7EWFB0C5j4uyoQh37Sf+9kHRfg5Rg==",
   "success": true,
   "projectFilePath": "C:\\Users\\lauan\\source\\nerdstore\\NerdStore\\src\\NerdStore.Catalogo.Data\\NerdStore.Catalogo.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lauan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\lauan\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
     "C:\\Users\\lauan\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\lauan\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\lauan\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
