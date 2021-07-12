@@ -95,3 +95,7 @@ C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\obj\Debug\net
 C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\obj\Debug\net5.0\NerdStore.WebApp.MVC.genruntimeconfig.cache
 C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\obj\Debug\net5.0\Razor\Views\AdminProdutos\AtualizarProduto.cshtml.g.cs
+C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\obj\Debug\net5.0\Razor\Views\AdminProdutos\Estoque.cshtml.g.cs
+C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\obj\Debug\net5.0\Razor\Views\AdminProdutos\Index.cshtml.g.cs
+C:\Users\lauan\source\nerdstore\NerdStore\src\NerdStore.WebApp.MVC\obj\Debug\net5.0\Razor\Views\AdminProdutos\NovoProduto.cshtml.g.cs
