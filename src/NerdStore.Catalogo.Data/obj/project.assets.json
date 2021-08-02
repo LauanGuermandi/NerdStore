@@ -5850,10 +5850,9 @@
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
         "https://paschoalotto.pkgs.visualstudio.com/_packaging/Paschoalotto/nuget/v3/index.json": {},
-        "https://pkgs.dev.azure.com/paschoalotto/HUB.Infra/_packaging/HUB.Infra/nuget/v3/index.json": {}
+        "https://pkgs.dev.azure.com/paschoalotto/HUB/_packaging/PagouFacil/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {

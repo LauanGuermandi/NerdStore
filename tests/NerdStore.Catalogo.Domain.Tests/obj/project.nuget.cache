@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HQx08MRacVpiFmNtj4vjRcrMU9lra34UJVrArldYQcmmhuEvN01OcJ8XBoA72+BsA9gs6s7tx0GY3429JhHV7A==",
+  "dgSpecHash": "l3sr7ZHoYtk3shykFOd41TeCDMp0yesDigQXjR0TIeeg5otU/WN94qXeUMHytmq8cfMVYjQ9XBZ6CndtoQ9xQA==",
   "success": true,
   "projectFilePath": "C:\\Users\\lauan\\source\\nerdstore\\NerdStore\\tests\\NerdStore.Catalogo.Domain.Tests\\NerdStore.Catalogo.Domain.Tests.csproj",
   "expectedPackageFiles": [
