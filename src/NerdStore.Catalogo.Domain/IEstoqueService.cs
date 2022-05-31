@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
+using NerdStore.Core.DomainObjects.DTO;
 
 namespace NerdStore.Catalogo.Domain
 {
-    public interface IEstoqueService
+    public interface IEstoqueService : IDisposable
     {
         Task<bool> DebitarEstoque(Guid produtoId, int quantidade);
+        Task<bool> DebitarListaProdutosPedido(ListaProdutosPedido lista);
         Task<bool> ReporEstoque(Guid produtoId, int quantidade);
-        void Dispose();
+        Task<bool> ReporListaProdutosPedido(ListaProdutosPedido lista);
     }
 }

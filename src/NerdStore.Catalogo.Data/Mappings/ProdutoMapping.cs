@@ -4,38 +4,35 @@ using NerdStore.Catalogo.Domain;
 
 namespace NerdStore.Catalogo.Data.Mappings
 {
-    class ProdutoMapping : IEntityTypeConfiguration<Produto>
+    public class ProdutoMapping : IEntityTypeConfiguration<Produto>
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            // Defindo a chave primária
-            builder.HasKey(p => p.Id);
+            builder.HasKey(c => c.Id);
 
-            builder.Property(p => p.Nome)
+            builder.Property(c => c.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(250)");
 
-            builder.Property(p => p.Descricao)
+            builder.Property(c => c.Descricao)
                 .IsRequired()
                 .HasColumnType("varchar(500)");
 
-            builder.Property(p => p.Imagem)
+            builder.Property(c => c.Imagem)
                 .IsRequired()
                 .HasColumnType("varchar(250)");
 
-            // Mapeando o objeto de valor Dimensoes, na mesma tabela do produto
-            // O mesmo não é uma entidade pra ser gerado em outra tabela
-            builder.OwnsOne(p => p.Dimensoes, dimen =>
+            builder.OwnsOne(c => c.Dimensoes, cm =>
             {
-                dimen.Property(d => d.Altura)
+                cm.Property(c => c.Altura)
                     .HasColumnName("Altura")
                     .HasColumnType("int");
 
-                dimen.Property(d => d.Largura)
+                cm.Property(c => c.Largura)
                     .HasColumnName("Largura")
                     .HasColumnType("int");
 
-                dimen.Property(d => d.Profundidade)
+                cm.Property(c => c.Profundidade)
                     .HasColumnName("Profundidade")
                     .HasColumnType("int");
             });

@@ -1,10 +1,16 @@
-﻿using NerdStore.Core.DomainObjects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NerdStore.Core.DomainObjects;
 
 namespace NerdStore.Catalogo.Domain
 {
     public class Categoria : Entity
     {
+        public string Nome { get; private set; }
+        public int Codigo { get; private set; }
+
+        // EF Relation
+        public ICollection<Produto> Produtos { get; set; }
+
         protected Categoria() { }
 
         public Categoria(string nome, int codigo)
@@ -15,11 +21,6 @@ namespace NerdStore.Catalogo.Domain
             Validar();
         }
 
-        public string Nome { get; private set; }
-        public int Codigo { get; private set; }
-
-        public ICollection<Produto> Produtos { get; set; }
-
         public override string ToString()
         {
             return $"{Nome} - {Codigo}";
@@ -27,9 +28,8 @@ namespace NerdStore.Catalogo.Domain
 
         public void Validar()
         {
-            Validacoes.ValidarSeVazio(Nome, "O Nome da categoria não pode estar vazio!");
-            Validacoes.ValidarSeIgual(Codigo, 0, "O Código não pode ser 0!");
+            Validacoes.ValidarSeVazio(Nome, "O campo Nome da categoria não pode estar vazio");
+            Validacoes.ValidarSeIgual(Codigo, 0, "O campo Codigo não pode ser 0");
         }
-
     }
 }

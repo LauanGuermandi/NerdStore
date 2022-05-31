@@ -1,7 +1,8 @@
-﻿using NerdStore.Core.DomainObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentValidation.Results;
+using NerdStore.Core.DomainObjects;
 
 namespace NerdStore.Vendas.Domain
 {
@@ -19,8 +20,8 @@ namespace NerdStore.Vendas.Domain
         private readonly List<PedidoItem> _pedidoItems;
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
 
-        // EF relations
-        public virtual Voucher Voucher { get; private set; }
+        // EF Rel.
+        public Voucher Voucher { get; private set; }
 
         public Pedido(Guid clienteId, bool voucherUtilizado, decimal desconto, decimal valorTotal)
         {
@@ -36,11 +37,16 @@ namespace NerdStore.Vendas.Domain
             _pedidoItems = new List<PedidoItem>();
         }
 
-        public void AplicarVoucher(Voucher voucher)
+        public ValidationResult AplicarVoucher(Voucher voucher)
         {
+            var validationResult = voucher.ValidarSeAplicavel();
+            if (!validationResult.IsValid) return validationResult;
+
             Voucher = voucher;
             VoucherUtilizado = true;
             CalcularValorPedido();
+
+            return validationResult;
         }
 
         public void CalcularValorPedido()
@@ -75,6 +81,99 @@ namespace NerdStore.Vendas.Domain
 
             ValorTotal = valor < 0 ? 0 : valor;
             Desconto = desconto;
+        }
+
+        public bool PedidoItemExistente(PedidoItem item)
+        {
+            return _pedidoItems.Any(p => p.ProdutoId == item.ProdutoId);
+        }
+
+        public void AdicionarItem(PedidoItem item)
+        {
+            if (!item.EhValido()) return;
+
+            item.AssociarPedido(Id);
+
+            if (PedidoItemExistente(item))
+            {
+                var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+                itemExistente.AdicionarUnidades(item.Quantidade);
+                item = itemExistente;
+
+                _pedidoItems.Remove(itemExistente);
+            }
+
+            item.CalcularValor();
+            _pedidoItems.Add(item);
+
+            CalcularValorPedido();
+        }
+
+        public void RemoverItem(PedidoItem item)
+        {
+            if (!item.EhValido()) return;
+
+            var itemExistente = PedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+
+            if (itemExistente == null) throw new DomainException("O item não pertence ao pedido");
+            _pedidoItems.Remove(itemExistente);
+
+            CalcularValorPedido();
+        }
+
+        public void AtualizarItem(PedidoItem item)
+        {
+            if (!item.EhValido()) return;
+            item.AssociarPedido(Id);
+
+            var itemExistente = PedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+
+            if (itemExistente == null) throw new DomainException("O item não pertence ao pedido");
+
+            _pedidoItems.Remove(itemExistente);
+            _pedidoItems.Add(item);
+
+            CalcularValorPedido();
+        }
+
+        public void AtualizarUnidades(PedidoItem item, int unidades)
+        {
+            item.AtualizarUnidades(unidades);
+            AtualizarItem(item);
+        }
+
+        public void TornarRascunho()
+        {
+            PedidoStatus = PedidoStatus.Rascunho;
+        }
+
+        public void IniciarPedido()
+        {
+            PedidoStatus = PedidoStatus.Iniciado;
+        }
+
+        public void FinalizarPedido()
+        {
+            PedidoStatus = PedidoStatus.Pago;
+        }
+
+        public void CancelarPedido()
+        {
+            PedidoStatus = PedidoStatus.Cancelado;
+        }
+
+        public static class PedidoFactory
+        {
+            public static Pedido NovoPedidoRascunho(Guid clienteId)
+            {
+                var pedido = new Pedido
+                {
+                    ClienteId = clienteId,
+                };
+
+                pedido.TornarRascunho();
+                return pedido;
+            }
         }
     }
 }

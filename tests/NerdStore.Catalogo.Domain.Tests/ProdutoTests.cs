@@ -1,5 +1,5 @@
-using NerdStore.Core.DomainObjects;
 using System;
+using NerdStore.Core.DomainObjects;
 using Xunit;
 
 namespace NerdStore.Catalogo.Domain.Tests
@@ -9,6 +9,7 @@ namespace NerdStore.Catalogo.Domain.Tests
         [Fact]
         public void Produto_Validar_ValidacoesDevemRetornarExceptions()
         {
+
             // Arrange & Act & Assert
 
             var ex = Assert.Throws<DomainException>(() =>
@@ -27,7 +28,7 @@ namespace NerdStore.Catalogo.Domain.Tests
                 new Produto("Nome", "Descricao", false, 0, Guid.NewGuid(), DateTime.Now, "Imagem", new Dimensoes(1, 1, 1))
             );
 
-            Assert.Equal("O campo Valor do produto não pode ser menor e igual 0", ex.Message);
+            Assert.Equal("O campo Valor do produto não pode se menor igual a 0", ex.Message);
 
             ex = Assert.Throws<DomainException>(() =>
                 new Produto("Nome", "Descricao", false, 100, Guid.Empty, DateTime.Now, "Imagem", new Dimensoes(1, 1, 1))

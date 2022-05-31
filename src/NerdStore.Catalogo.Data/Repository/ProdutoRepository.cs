@@ -16,26 +16,27 @@ namespace NerdStore.Catalogo.Data.Repository
         {
             _context = context;
         }
-
-        public IUnitOfWork UnitOfWork => _context; // Reflete meu contexto: ProdutoRepository.UniOfWork.Commit();
+        public IUnitOfWork UnitOfWork => _context;
 
         public async Task<IEnumerable<Produto>> ObterTodos()
         {
             return await _context.Produtos.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Produto> ObterPorId(Guid Id)
+        public async Task<Produto> ObterPorId(Guid id)
         {
-            return await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == Id);
+            //return await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Produtos.FindAsync(id);
         }
 
         public async Task<IEnumerable<Produto>> ObterPorCategoria(int codigo)
         {
-            return await _context.Produtos.AsNoTracking().Include(p => p.Categoria).Where(p => p.Categoria.Codigo == codigo).ToListAsync();
+            return await _context.Produtos.AsNoTracking().Include(p => p.Categoria).Where(c => c.Categoria.Codigo == codigo).ToListAsync();
         }
+
         public async Task<IEnumerable<Categoria>> ObterCategorias()
         {
-            return await _context.Categoria.AsNoTracking().ToListAsync();
+            return await _context.Categorias.AsNoTracking().ToListAsync();
         }
 
         public void Adicionar(Produto produto)
@@ -50,12 +51,12 @@ namespace NerdStore.Catalogo.Data.Repository
 
         public void Adicionar(Categoria categoria)
         {
-            _context.Categoria.Add(categoria);
+            _context.Categorias.Add(categoria);
         }
 
         public void Atualizar(Categoria categoria)
         {
-            _context.Categoria.Update(categoria);
+            _context.Categorias.Update(categoria);
         }
 
         public void Dispose()
